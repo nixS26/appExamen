@@ -8,7 +8,7 @@
     <resultMap id="serie" type="SerieModel">
         <result property="codSerie"					column="COD_SERIE" />
         <result property="tipoDocumento" 			column="COD_TIPO_DOCUMENTO" />
-        <result property="desTipoDocumento" 		column="DES_TIPO_DOCUMENTO" />        
+        <result property="desTipoDocumento" 		column="DES_TIPO_DOCUMENTO" />
         <result property="nroSerie" 				column="NRO_SERIE" />
         <result property="correlativo" 				column="CORRELATIVO" />
         <result property="maxcorrelativo" 			column="MAX_CORRELATIVO" />
@@ -26,7 +26,9 @@
         <parameter property="FLAG_RESULTADO"   		jdbcType="VARCHAR"  mode="OUT"/>
         <parameter property="MENSAJE_RESULTADO"    	jdbcType="VARCHAR"  mode="OUT"/>
     </parameterMap>
-    
+
+
+
     <!-- ************************* QUERYS ******************************* -->
     <select id="listarSerie" parameterMap="listarSerieParams" resultMap="serie" statementType="CALLABLE">
     	{CALL SP_LISTAR_SERIES(?,?,?,?) }
@@ -48,6 +50,33 @@
         FROM serie
         WHERE V_NRO_SERIE = #{p_V_NRO_SERIE}
     </select>
+
+    <select id="obtenerSeriePorCodigo" parameterType="int" resultType="pe.com.examen.model.SerieModel">
+        SELECT
+            N_COD_SERIE AS codSerie,
+            V_COD_TIPO_DOCUMENTO AS tipoDocumento,
+            V_DESCRIPCION AS desTipoDocumento,
+            V_NRO_SERIE AS nroSerie,
+            N_CORRELATIVO AS correlativo,
+            N_MAX_CORRELATIVO AS maxcorrelativo,
+            N_ACTIVO AS activo
+        FROM TBL_SERIE
+        WHERE N_COD_SERIE = #{p_N_COD_SERIE}
+    </select>
+
+    <update id="actualizarSerie" parameterType="hashmap" statementType="CALLABLE">
+        {CALL SP_ACTUALIZAR_SERIE(
+                #{p_cod_serie, mode=IN, jdbcType=INTEGER},
+                #{p_cod_tipo_documento, mode=IN, jdbcType=VARCHAR},
+                #{p_descripcion, mode=IN, jdbcType=VARCHAR},
+                #{p_nro_serie, mode=IN, jdbcType=CHAR},
+                #{p_correlativo, mode=IN, jdbcType=INTEGER},
+                #{p_maxcorrelativo, mode=IN, jdbcType=INTEGER},
+                #{p_activo, mode=IN, jdbcType=BOOLEAN}
+              )}
+    </update>
+
+
 
 
 

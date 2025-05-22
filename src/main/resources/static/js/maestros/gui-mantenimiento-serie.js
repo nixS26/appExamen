@@ -21,7 +21,34 @@ $(document).ready(function() {
         cargarComboTipoDocumentoModal();
         $('#modalSerie').modal('show');
 
+
+
 });
+    $('#tablaSerie tbody').on('click', '.btn-view', function () {
+        var codSerie = $(this).data('id');
+        console.log('CodSerie del botón:', codSerie);
+
+        if(codSerie) {
+            window.location.href = '/appExamen/detail-serie/' + codSerie;
+        } else {
+            alert('No se encontró el código de serie');
+        }
+    });
+
+    $('#tablaSerie tbody').on('click', '.btn-edit', function () {
+        var codSerie = $(this).data('id');
+        console.log('CodSerie del botón:', codSerie);
+
+        if(codSerie) {
+            window.location.href = '/appExamen/update-serie/' + codSerie;
+        } else {
+            alert('No se encontró el código de serie');
+        }
+    });
+
+
+
+
 });
 
 function inicializarVariables(){
@@ -130,17 +157,18 @@ function inicializarTabla(){
                 "targets": [7],
                 "className": "dt-body-center",
                 "orderable": false,
-                "render":
-                    function (data, type, row ) {
-                        return  "<div style='display:flex;justify-content:space-around;'>" +
-                            "<button title='Ver' class='btn-view btn btn-info btn-xs'>" +
-                            "<span><i class=\"fas fa-eye\"></i></span>" +
-                            "</button>" +
-                            "<button title='Modificar' class='btn-edit btn btn-primary btn-xs'>" +
-                            "<span><i class=\"fas fa-edit\"></i></span>" +
-                            "</button>" +
-                            "</div>";
-                    }
+                "render": function (data, type, row) {
+                    return  "<div style='display:flex;justify-content:space-around;'>" +
+                        "<button data-id='" + row.codSerie + "' title='Ver' class='btn-view btn btn-info btn-xs'>" +
+                        "<span><i class=\"fas fa-eye\"></i></span>" +
+                        "</button>" +
+                        "<button data-id='"+ row.codSerie + "'  title='Modificar' class='btn-edit btn btn-primary btn-xs'>" +
+                        "<span><i class=\"fas fa-edit\"></i></span>" +
+                        "</button>" +
+                        "</div>";
+                }
+
+
             }
         ],
         "fnRowCallback":

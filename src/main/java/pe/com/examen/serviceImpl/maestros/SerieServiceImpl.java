@@ -77,4 +77,24 @@ public class SerieServiceImpl implements SerieService {
 		return cantidad != null && cantidad > 0;
 	}
 
+	@Override
+	public SerieModel obtenerSeriePorCodigo(int p_N_COD_SERIE) throws Exception {
+		return serieMapper.obtenerSeriePorCodigo(p_N_COD_SERIE);
+	}
+
+	@Override
+	public void actualizarSerie(SerieModel serie) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("p_cod_serie", serie.getCodSerie());                  // INTEGER
+		params.put("p_cod_tipo_documento", serie.getTipoDocumento());    // VARCHAR
+		params.put("p_descripcion", serie.getDesTipoDocumento());             // VARCHAR
+		params.put("p_nro_serie", serie.getNroSerie());                     // CHAR
+		params.put("p_correlativo", serie.getCorrelativo());             // INTEGER
+		params.put("p_maxcorrelativo", serie.getMaxcorrelativo());       // INTEGER
+		params.put("p_activo", serie.getActivo());                       // BOOLEAN
+
+		serieMapper.actualizarSerie(params);
+	}
+
+
 }

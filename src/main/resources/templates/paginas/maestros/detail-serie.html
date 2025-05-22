@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ver Detalle Serie</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+
+  <div class="kahaxi_titulo">
+    <div class="kahaxi_titulo_container">
+      <div class="kahaxi_titulo_logo"><i class="fas fa-plus"></i></div>
+      <div class="kahaxi_titulo_text">Ver Detalle Serie</div>
+    </div>
+    <div class="subrayado"></div>
+    <br>
+  </div>
+
+  <form th:object="${serie}">
+    <label>Código Serie:</label>
+    <input type="text" th:value="${serie.codSerie}" readonly />
+
+    <label class="label" >Tipo de documento</label>
+    <select class="form-control" disabled>
+      <option value="">-- TODOS --</option>
+      <option th:each="item : ${listaTipoDocumento}"
+              th:value="${item.codigo}"
+              th:text="${item.descripcion}"
+              th:selected="${item.codigo == serie.tipoDocumento}">
+      </option>
+    </select>
+    <br>
+    <br>
+    <label>Descripción:</label>
+    <input type="text" th:value="${serie.desTipoDocumento}" readonly />
+
+    <label>Nro Serie:</label>
+    <input type="text" th:value="${serie.nroSerie}" readonly />
+
+    <label>Correlativo:</label>
+    <input type="number" th:value="${serie.correlativo}" readonly />
+
+    <label>Máx Correlativo:</label>
+    <input type="number" th:value="${serie.maxcorrelativo}" readonly />
+
+    <label>Activo:</label>
+    <input type="checkbox" th:checked="${serie.activo == 1}" disabled />
+
+    <a th:href="@{/principal}" class="btn btn-secondary btn-sm ml-2">
+      <span class="mr-2"><i class="fas fa-arrow-left"></i></span>Regresar
+    </a>
+
+  </form>
+
+</div>
+</body>
+</html>
