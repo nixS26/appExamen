@@ -20,7 +20,5 @@
     <select id="cargarCombo" parameterMap="comboParams" resultMap="combo" statementType="CALLABLE">
       {CALL SP_CARGAR_COMBO_MAESTRO(?,?,?) }
     </select>
-    
-    
-    
+
 </mapper>

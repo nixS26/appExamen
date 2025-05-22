@@ -31,4 +31,25 @@
     <select id="listarSerie" parameterMap="listarSerieParams" resultMap="serie" statementType="CALLABLE">
     	{CALL SP_LISTAR_SERIES(?,?,?,?) }
     </select>
+
+
+    <insert id="insertarSerie" parameterType="hashmap" statementType="CALLABLE">
+        {CALL SP_INSERTAR_SERIE(
+                #{p_V_COD_TIPO_DOCUMENTO, mode=IN, jdbcType=VARCHAR},
+                #{p_V_DESCRIPCION, mode=IN, jdbcType=VARCHAR},
+                #{p_V_NRO_SERIE, mode=IN, jdbcType=CHAR},
+                #{p_N_CORRELATIVO, mode=IN, jdbcType=INTEGER},
+                #{p_N_MAX_CORRELATIVO, mode=IN, jdbcType=INTEGER}
+              )}
+    </insert>
+
+    <select id="contarPorNroSerie" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM serie
+        WHERE V_NRO_SERIE = #{p_V_NRO_SERIE}
+    </select>
+
+
+
+
 </mapper>

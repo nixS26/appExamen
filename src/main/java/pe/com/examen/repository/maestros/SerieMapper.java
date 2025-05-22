@@ -13,4 +13,6 @@ import pe.com.examen.model.SerieModel;
 public interface SerieMapper {
 	
 	List<SerieModel> listarSerie(Map params);
+	void insertarSerie(Map<String, Object> params);
+	Integer contarPorNroSerie(Map<String, Object> params) throws Exception;
 }

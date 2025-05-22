@@ -54,4 +54,27 @@ public class SerieServiceImpl implements SerieService {
 		return perfilList;
 	}
 
+	@Override
+	public void insertarSerie(SerieModel serie) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("p_V_COD_TIPO_DOCUMENTO", serie.getTipoDocumento());
+		params.put("p_V_DESCRIPCION", serie.getDescripcion());
+		params.put("p_V_NRO_SERIE", serie.getNroSerie());
+		params.put("p_N_CORRELATIVO", serie.getCorrelativo());
+		params.put("p_N_MAX_CORRELATIVO", serie.getMaxcorrelativo());
+
+		serieMapper.insertarSerie(params);
+	}
+
+	@Override
+	public boolean existeNroSerie(String nroSerie) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("p_V_NRO_SERIE", nroSerie);
+
+		// Asumiendo que el mapper devuelve la cantidad (int) de registros que tienen ese nroSerie
+		Integer cantidad = serieMapper.contarPorNroSerie(params);
+
+		return cantidad != null && cantidad > 0;
+	}
+
 }

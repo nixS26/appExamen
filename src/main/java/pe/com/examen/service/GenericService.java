@@ -6,5 +6,6 @@ import pe.com.examen.model.ComboModel;
 public interface GenericService {
 	
 	public List<ComboModel> cargarCombo(String codMaestro) throws Exception;
-	
+
+
 }

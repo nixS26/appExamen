@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Serie</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+
+    <div class="kahaxi_titulo">
+        <div class="kahaxi_titulo_container">
+            <div class="kahaxi_titulo_logo"><i class="fas fa-plus"></i></div>
+            <div class="kahaxi_titulo_text">Registrar Nueva Serie</div>
+        </div>
+        <div class="subrayado"></div>
+        <br>
+    </div>
+
+    <form th:action="@{/add-serie}" th:object="${serie}" method="post">
+
+        <label class="label" for="tipoDocumento">Tipo de documento</label>
+        <select id="tipoDocumento" class="form-control" th:field="*{tipoDocumento}">
+            <option value="" selected>-- TODOS --</option>
+            <option th:each="item : ${listaTipoDocumento}"
+                    th:value="${item.codigo}"
+                    th:text="${item.descripcion}">
+            </option>
+        </select>
+        <br><br>
+
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" th:field="*{descripcion}" required
+               title="La descripción es obligatoria"/>
+
+        <br><br>
+
+
+        <label for="nroSerie">Nro Serie:</label>
+        <input type="text" id="nroSerie" th:field="*{nroSerie}" maxlength="4" minlength="4" required
+               pattern="[A-Za-z0-9]{4}"
+               title="La serie debe tener exactamente 4 caracteres alfanuméricos"/>
+
+        <br><br>
+
+        <label for="correlativo">Correlativo:</label>
+        <input type="number" id="correlativo" th:field="*{correlativo}" min="1" required
+               title="El correlativo debe ser un número entero positivo"/>
+
+        <label for="maxcorrelativo">Máx Correlativo:</label>
+        <input type="number" id="maxcorrelativo" th:field="*{maxcorrelativo}" min="1" required
+               title="El máximo correlativo debe ser un número entero positivo y no menor que correlativo"/>
+
+        <br><br>
+
+        <button type="submit">Guardar</button>
+    </form>
+
+
+</div>
+</body>
+</html>

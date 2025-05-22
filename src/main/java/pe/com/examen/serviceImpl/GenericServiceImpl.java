@@ -25,7 +25,9 @@ public class GenericServiceImpl implements GenericService{
 	
 	@Override
 	public List<ComboModel> cargarCombo(String codMaestro) throws Exception {
-		
+
+
+
     	logger.info("entrando cargarCombo.......");
         Map<String, Object> params = new HashMap();
 		List<ComboModel> comboList;
@@ -51,5 +53,6 @@ public class GenericServiceImpl implements GenericService{
 		}
  		return comboList;
 	}
-	
+
+
 }

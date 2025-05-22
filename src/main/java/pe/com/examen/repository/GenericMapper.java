@@ -11,4 +11,5 @@ import pe.com.examen.model.ComboModel;
 public interface GenericMapper {
 
 	public List<ComboModel> cargarCombo(Map params);
+
 }
